@@ -1,1 +1,11 @@
-<p>upload works!</p>
+<h5>dasd</h5>
+<div class="container mt-5" (drop)="onDrop($event)" (dragover)="highlight()" (dragleave)="unhighlight()">
+  <h2>Formulário de Upload de Arquivos</h2>
+  <form (submit)="submitForm($event)">
+    <div class="mb-3" id="fileDropArea">
+      <label for="fileInput" class="form-label">Arraste e solte os arquivos aqui ou clique para selecionar</label>
+      <input type="file" class="form-control" #fileInput name="files[]" (change)="onFileChange($event)" multiple>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar Arquivos</button>
+  </form>
+</div>
