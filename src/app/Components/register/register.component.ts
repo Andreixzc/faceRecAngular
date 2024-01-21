@@ -11,4 +11,11 @@ import { FooterComponent } from '../footer/footer.component';
 })
 export class RegisterComponent {
 
+  submitForm(event: any) {
+    event.preventDefault();
+    console.log(event);
+
+    
+  }
+  
 }
