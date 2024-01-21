@@ -12,7 +12,7 @@ export class UploadService {
 
   postImages(formData: FormData) {
     formData.append("folderName","caralho") //mock data for testing
-    formData.append("id","a90ceb0c-5956-4d01-a712-465322c382b4") //mock data for testing
+    formData.append("id","3b79090b-94ea-49ce-a559-fe5a88e42b5c") //mock data for testing
     console.log(formData)
     return this.http.post<UploadResponse>(this.postImageUrl,formData);
   }
