@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FooterComponent } from '../footer/footer.component';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -12,18 +12,45 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class RegisterComponent {
 
-  meuForms!: FormGroup;
+  registrationForm!: FormGroup;
+  passwordsMatch: boolean = false;
 
-  constructor() {
-    this.meuForms = new FormGroup({
-      name: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
+  constructor(private fb: FormBuilder) {
+    this.registrationForm = this.fb.group({
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]]
     });
+
+    this.registrationForm.get('confirmPassword')?.setValidators( this.passwordMatchValidator());
   }
 
-  onSubmit(){
-    console.log(this.meuForms.value)
+  // passwordMatchValidator(): ValidatorFn {
+  //   return (control: AbstractControl): { [key: string]: any } | null => {
+  //     const password = this.registrationForm.get('password')?.value;
+  //     const confirmPassword = control.value;
+  //     return password === confirmPassword ? null : { 'passwordMismatch': true };
+  //   };
+  // }
+  passwordMatchValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const password = this.registrationForm.get('password')?.value;
+      const confirmPassword = control.value;
+  
+      // Verifica se as senhas são iguais
+      this.passwordsMatch = password === confirmPassword;
+  
+      // Retorna o objeto de erro se as senhas não coincidirem
+      return this.passwordsMatch ? null : { 'passwordMismatch': true };
+    };
   }
-
+  
+  onSubmit() {
+    if (this.registrationForm.valid) {
+      console.log('Form submitted:', this.registrationForm.value);
+    } else {
+      console.log('Form is invalid. Please check your inputs.');
+    }
+  }
 }
