@@ -11,9 +11,7 @@ export class RegisterService {
   registerUrl = "http://localhost:9090/user";
 
   registerUser(formGroup: FormGroup) {
-    console.log("dassda")
     formGroup.removeControl('confirmPassword');
-    console.log(formGroup.value);
     return this.http.post(this.registerUrl, formGroup.value)
   }
 

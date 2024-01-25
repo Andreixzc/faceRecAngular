@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { LoginService } from '../../Services/login.service';
+import { error } from 'console';
 
 @Component({
   selector: 'app-login',
@@ -11,20 +13,42 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class LoginComponent {
 
   loginForm!: FormGroup;
+  invalidCredentials: boolean = false;
 
-  constructor() {
-    this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required])
-    })
+  // constructor(private fb: FormControl, private loginService: LoginService, private router: FormControl) {
+  //   this.loginForm = new FormGroup({
+  //     email: new FormControl('', [Validators.required, Validators.email]),
+  //     password: new FormControl('', [Validators.required])
+  //   })
+  // }
+  constructor(private fb: FormBuilder, private loginService: LoginService) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
+    });
   }
 
   onSubmit() {
+
+    console.log("entrou")
     if (this.loginForm.valid) {
-      console.log('Form submitted:', this.loginForm.value);
-    } else {
+      this.loginService.loginUser(this.loginForm).subscribe({
+        next: response => {
+          console.log('Login successful:', response);
+          //redirecionar para homepage e armazenar a response no local storage.
+          localStorage.setItem('user_jwt', JSON.stringify(response));
+        },
+        error: error => {
+          console.error('Login failed:', error);
+          this.invalidCredentials = true;
+        }
+      }
+
+      );
+    }
+    else {
       console.log('Form is invalid. Please check your inputs.');
     }
   }
-    
+
 }
