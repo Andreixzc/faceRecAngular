@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FooterComponent } from '../footer/footer.component';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { RegisterService } from '../../Services/register.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,7 @@ export class RegisterComponent {
   registrationForm!: FormGroup;
   passwordsMatch: boolean = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private registerService : RegisterService) {
     this.registrationForm = this.fb.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
@@ -48,9 +49,12 @@ export class RegisterComponent {
   
   onSubmit() {
     if (this.registrationForm.valid) {
+      
       console.log('Form submitted:', this.registrationForm.value);
+      this.registerService.registerUser(this.registrationForm).subscribe(response => {});
     } else {
       console.log('Form is invalid. Please check your inputs.');
     }
+    
   }
 }
