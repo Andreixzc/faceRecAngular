@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from '../navbar/navbar.component';
-import { FooterComponent } from '../footer/footer.component';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { RegisterService } from '../../Services/register.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +15,7 @@ export class RegisterComponent {
   registrationForm!: FormGroup;
   passwordsMatch: boolean = false;
 
-  constructor(private fb: FormBuilder, private registerService : RegisterService) {
+  constructor(private fb: FormBuilder, private registerService: RegisterService, private router: Router) {
     this.registrationForm = this.fb.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
@@ -24,37 +23,59 @@ export class RegisterComponent {
       confirmPassword: ['', [Validators.required]]
     });
 
-    this.registrationForm.get('confirmPassword')?.setValidators( this.passwordMatchValidator());
+    this.registrationForm.get('confirmPassword')?.setValidators(this.passwordMatchValidator());
   }
 
-  // passwordMatchValidator(): ValidatorFn {
-  //   return (control: AbstractControl): { [key: string]: any } | null => {
-  //     const password = this.registrationForm.get('password')?.value;
-  //     const confirmPassword = control.value;
-  //     return password === confirmPassword ? null : { 'passwordMismatch': true };
-  //   };
-  // }
   passwordMatchValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const password = this.registrationForm.get('password')?.value;
       const confirmPassword = control.value;
-  
-      // Verifica se as senhas são iguais
       this.passwordsMatch = password === confirmPassword;
-  
-      // Retorna o objeto de erro se as senhas não coincidirem
       return this.passwordsMatch ? null : { 'passwordMismatch': true };
     };
   }
-  
+
+  // onSubmit() {
+  //   if (this.registrationForm.valid) {
+
+  //     console.log('Form submitted:', this.registrationForm.value);
+  //     this.registerService.registerUser(this.registrationForm).subscribe();
+  //   } else {
+  //     console.log('Form is invalid. Please check your inputs.');
+  //   }
+
+  // }
+  // onSubmit() {
+  //   if (this.registrationForm.valid) {
+  //     console.log('Form submitted:', this.registrationForm.value);
+
+  //     this.registerService.registerUser(this.registrationForm).subscribe(
+  //       response => {
+  //         console.log('Registration successful:', response);
+  //         this.router.navigate(['/login']);
+  //       },
+  //       error => {
+  //         console.error('Registration failed:', error);
+  //       }
+  //     );
+  //   } else {
+  //     console.log('Form is invalid. Please check your inputs.');
+  //   }
+  // }
   onSubmit() {
     if (this.registrationForm.valid) {
-      
-      console.log('Form submitted:', this.registrationForm.value);
-      this.registerService.registerUser(this.registrationForm).subscribe(response => {});
+      this.registerService.registerUser(this.registrationForm).subscribe({
+        next: (response) => {
+          console.log('Registration successful:', response);
+          this.router.navigate(['/login']);
+        },
+        error: (error) => {
+          console.error('Registration failed:', error);
+
+        },
+      });
     } else {
       console.log('Form is invalid. Please check your inputs.');
     }
-    
   }
 }
