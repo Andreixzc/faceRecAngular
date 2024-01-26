@@ -56,6 +56,7 @@ export class UploadComponent {
       console.log(formData);
 
     });
+    
   }
 
 }
