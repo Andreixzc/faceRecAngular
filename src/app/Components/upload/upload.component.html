@@ -1,6 +1,11 @@
 <div class="container mt-5">
   <h5>Folder creation</h5>
   <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+    @if (successUpload) {
+      <div class="alert alert-success">
+        <strong>Files uploaded!</strong>
+      </div>
+    }
     <label class="form-label" for="customFile">Upload your images</label>
     <input type="text" class="form-control mb-3" formControlName="folderName" placeholder="Nome da pasta"
       aria-label="Nome da pasta" aria-describedby="button-addon2">
@@ -9,6 +14,6 @@
       }
     <input type="file" (change)="onFileSelect($event)" class="form-control" formControlName="file" id="customFile"
       multiple />
-    <button type="submit" class="btn btn-primary mt-3">Enviar Arquivos</button>
+    <button type="submit" class="btn btn-primary mt-3">Upload Files</button>
   </form>
 </div>

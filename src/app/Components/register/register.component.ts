@@ -35,33 +35,6 @@ export class RegisterComponent {
     };
   }
 
-  // onSubmit() {
-  //   if (this.registrationForm.valid) {
-
-  //     console.log('Form submitted:', this.registrationForm.value);
-  //     this.registerService.registerUser(this.registrationForm).subscribe();
-  //   } else {
-  //     console.log('Form is invalid. Please check your inputs.');
-  //   }
-
-  // }
-  // onSubmit() {
-  //   if (this.registrationForm.valid) {
-  //     console.log('Form submitted:', this.registrationForm.value);
-
-  //     this.registerService.registerUser(this.registrationForm).subscribe(
-  //       response => {
-  //         console.log('Registration successful:', response);
-  //         this.router.navigate(['/login']);
-  //       },
-  //       error => {
-  //         console.error('Registration failed:', error);
-  //       }
-  //     );
-  //   } else {
-  //     console.log('Form is invalid. Please check your inputs.');
-  //   }
-  // }
   onSubmit() {
     if (this.registrationForm.valid) {
       this.registerService.registerUser(this.registrationForm).subscribe({
