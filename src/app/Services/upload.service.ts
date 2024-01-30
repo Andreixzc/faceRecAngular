@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UploadResponse } from '../Interfaces/upload-response';
 
@@ -11,9 +11,14 @@ export class UploadService {
   postImageUrl = "http://localhost:9090/s3/upload";
 
   postImages(formData: FormData) {
-    formData.append("folderName","caralho") //mock data for testing
-    formData.append("id","3b79090b-94ea-49ce-a559-fe5a88e42b5c") //mock data for testing
-    console.log(formData)
-    return this.http.post<UploadResponse>(this.postImageUrl,formData);
+    
+    
+    let jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGYWNlUmVjIiwic3ViIjoiMjMxOWUxMGEtMDc0NC00ZGVlLWI5MDctZTg1Y2U0OWY2MmEyIiwiZXhwIjoxNzA2NjAxMDQ0fQ.n00xfLbXt53uqa4x0SPzjG4xBL8hwS3K7QZ8MwJdTzU";
+    const token = `Bearer ${jwt}`;
+    const headers = new HttpHeaders()
+    .set("Authorization", token)
+    // .set("Content-Type", "multipart/form-data");
+
+    return this.http.post<UploadResponse>(this.postImageUrl, formData, { headers });
   }
 }

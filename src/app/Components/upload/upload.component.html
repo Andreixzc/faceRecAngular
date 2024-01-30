@@ -1,11 +1,14 @@
-<h5>dasd</h5>
-<div class="container mt-5" (drop)="onDrop($event)" (dragover)="highlight()" (dragleave)="unhighlight()">
-  <h2>Formulário de Upload de Arquivos</h2>
-  <form (submit)="submitForm($event)">
-    <div class="mb-3" id="fileDropArea">
-      <label for="fileInput" class="form-label">Arraste e solte os arquivos aqui ou clique para selecionar</label>
-      <input type="file" class="form-control" #fileInput name="files[]" (change)="onFileChange($event)" multiple>
-    </div>
-    <button type="submit" class="btn btn-primary">Enviar Arquivos</button>
+<div class="container mt-5">
+  <h5>Folder creation</h5>
+  <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+    <label class="form-label" for="customFile">Upload your images</label>
+    <input type="text" class="form-control mb-3" formControlName="folderName" placeholder="Nome da pasta"
+      aria-label="Nome da pasta" aria-describedby="button-addon2">
+      @if (uploadForm.get('folderName')?.hasError('required') && uploadForm.get('folderName')?.touched) {
+        <span  class="form-error text-danger">Folder name is required</span>
+      }
+    <input type="file" (change)="onFileSelect($event)" class="form-control" formControlName="file" id="customFile"
+      multiple />
+    <button type="submit" class="btn btn-primary mt-3">Enviar Arquivos</button>
   </form>
 </div>

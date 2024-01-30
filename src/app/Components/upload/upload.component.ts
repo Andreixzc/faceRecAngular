@@ -1,62 +1,47 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { UploadService } from '../../Services/upload.service';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-upload',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.css'
 })
 export class UploadComponent {
 
-  constructor(private uploadService: UploadService) { };
+  uploadForm!: FormGroup;
+  file!: string;
+  myFiles:string [] = [];
 
-  @ViewChild('fileInput') fileInput!: ElementRef;
-
-
-  onFileChange(event: any) {
-    const files = event.target.files;
-    this.handleFiles(files);
-  }
-
-  onDrop(event: any) {
-    event.preventDefault();
-    const files = event.dataTransfer.files;
-    this.handleFiles(files);
-  }
-
-  preventDefaults(event: any) {
-    event.preventDefault();
-    event.stopPropagation();
-  }
-
-  highlight() {
-    // Adicione estilos de destaque ao arrastar sobre a área de soltar
-  }
-
-  unhighlight() {
-    // Remova estilos de destaque quando o arrastar sai da área de soltar
-  }
-
-  handleFiles(files: FileList) {
-    // Manipule os arquivos enviados aqui
-  }
-
-  submitForm(event: any) {
-    event.preventDefault();
-
-    const files = this.fileInput.nativeElement.files;
-    const formData = new FormData();
-
-    for (let i = 0; i < files.length; i++) {
-      formData.append('file', files[i]);
-    }
-    this.uploadService.postImages(formData).subscribe(response => {
-      console.log(formData);
-
+  constructor(private uploadService: UploadService, private fb: FormBuilder) {
+    this.uploadForm = this.fb.group({
+      folderName: new FormControl("",Validators.required),
+      file: new FormControl(null),
+      
     });
-    
+  };
+  onFileSelect(event: any){
+    for (var i = 0; i < event.target.files.length; i++) { 
+      this.file = event.target.files[i];
+      this.myFiles.push(event.target.files[i]);
+    }
   }
+  onSubmit() {
+    const formData = new FormData();
+    
+    formData.append('folderName', this.uploadForm.get('folderName')?.value);
+    for (let i = 0; i < this.myFiles.length; i++) {
+      formData.append("file", this.myFiles[i]);
+      
+    }
+    this.uploadService.postImages(formData).subscribe({});
+
+  }
+
+
+
+
 
 }
