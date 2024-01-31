@@ -3,19 +3,15 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { customInterceptor } from './Auth/jwt-interceptor/jwt-interceptor.component';
 
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(),withInterceptors([customInterceptor])),
   ]
 };
 
-// export const appConfig: ApplicationConfig = {
-//   providers: [
-//     provideRouter(routes),
-//     importProvidersFrom(HttpClientModule),
-//   ]
-// };
+
