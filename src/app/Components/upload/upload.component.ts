@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class UploadComponent {
 
+  teste : boolean = false;
   uploadForm!: FormGroup;
   file!: string;
   myFiles:string [] = [];
