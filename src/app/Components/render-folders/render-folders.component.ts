@@ -18,7 +18,7 @@ export class RenderFoldersComponent implements OnInit {
   folders : FolderListResponse[] = [];
   renderFolders() {
     if (typeof localStorage !== 'undefined') {
-      localStorage.setItem('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGYWNlUmVjIiwic3ViIjoiNzQ3MjUyMmUtMzEyMC00MjA1LWEzMWItYTA2MDA4NDMyMTA4IiwiZXhwIjoxNzA2NTE2NjI1fQ.ITLBERlkpSLZV7USu-hsS-qtySAyR5QxG-2OJIpF4Ng');
+      localStorage.setItem('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGYWNlUmVjIiwic3ViIjoiODUxZmZkMGQtZDBmOS00OTk0LThiZjgtOTdkMTNkNDNjMDY4IiwiZXhwIjoxNzA2ODY0ODU1fQ.ac7ApI9TKzu1UgldyKiLHky0e5GQn74t25UnhlZUrNM');
       let jwt: string = localStorage.getItem('jwt') || '';
       if (jwt == '') {
         console.log('jwt is empty');

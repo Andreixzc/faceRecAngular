@@ -3,7 +3,7 @@ import { HomePageComponent } from './Pages/home-page/home-page.component';
 import { UploadPageComponent } from './Pages/upload-page/upload-page.component';
 import { RegisterPageComponent } from './Pages/register-page/register-page.component';
 import { LoginPageComponent } from './Pages/login-page/login-page.component';
-import { FileManagerPageComponent } from './Pages/file-manager-page/file-manager-page.component';
+import { DashboardPageComponent } from './Pages/dashboard-page/dashboard-page.component';
 export const routes: Routes = [
     {
       path: '',
@@ -22,7 +22,7 @@ export const routes: Routes = [
       component: LoginPageComponent
     },
     {
-      path: 'file-manager',
-      component: FileManagerPageComponent
+      path: 'file-dashboard',
+      component: DashboardPageComponent
     }
   ];

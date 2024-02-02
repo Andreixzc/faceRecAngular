@@ -1,30 +1,32 @@
-<h5 class="font-size-16 me-3 mb-0">Folders</h5>      
-@for (folder of folders; track $index) {
-  <div class="row mt-4">  
-      <div class="col-xl-4 col-sm-6">
-          <div class="card shadow-none border">
-              <div class="card-body p-3">
-                  <div class="">
-                      <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                              <i class="bx bxs-folder h1 mb-0 text-warning"></i>
-                          </div>
-                      </div>
-                      <div class="d-flex mt-3">
-                          <div class="overflow-hidden me-auto">
-                              <h5 class="font-size-15 text-truncate mb-1"><a href="javascript: void(0);" class="text-body">{{folder.name}}</a></h5>
-                              
-                              <!-- <p class="text-muted text-truncate mb-0">12 Files</p> --> <!--Adicionar quantidade de itens da pasta-->
-                          </div>
-                          <!-- Possivel melhora, adicionar last edited na pasta: -->
-                          <!-- <div class="align-self-end ms-2">
-                              <p class="text-muted mb-0 font-size-13"><i class="mdi mdi-clock"></i> 15 min ago</p>
-                          </div> -->
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-    
-  </div>
-}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <h5 class="font-size-16 me-3 mb-0">Folders</h5>      
+      @for (folder of folders; track $index) {
+        <div class="row mt-4">  
+            <div class="col-xl-4 col-sm-6">
+                <div class="card shadow-none border">
+                    <div class="card-body p-3">
+                        <div class="">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="bx bxs-folder h1 mb-0 text-warning"></i>
+                                </div>
+                            </div>
+                            <div class="d-flex mt-3">
+                                <div class="overflow-hidden me-auto">
+                                    <h5 class="font-size-15 text-truncate mb-1"><a href="javascript: void(0);" class="text-body">{{folder.name}}</a></h5>
+                                    
+                                    <!-- <p class="text-muted text-truncate mb-0">12 Files</p> --> <!--Adicionar quantidade de itens da pasta-->
+                                </div>
+                                <!-- Possivel melhora, adicionar last edited na pasta: -->
+                                <!-- <div class="align-self-end ms-2">
+                                    <p class="text-muted mb-0 font-size-13"><i class="mdi mdi-clock"></i> 15 min ago</p>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+      }

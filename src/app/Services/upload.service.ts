@@ -13,7 +13,7 @@ export class UploadService {
   postImages(formData: FormData) {
     
     
-    let jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGYWNlUmVjIiwic3ViIjoiMmNlMWQzZTgtMGIwZS00ZTZkLWI0MTYtMjJmNmNmMzAxZjA0IiwiZXhwIjoxNzA2NjE4NjQ2fQ.RvODadygt1YQH0IZd6rJaB249kZMVg2YhwWs9G4KzBk";
+    let jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGYWNlUmVjIiwic3ViIjoiODUxZmZkMGQtZDBmOS00OTk0LThiZjgtOTdkMTNkNDNjMDY4IiwiZXhwIjoxNzA2ODY0ODU1fQ.ac7ApI9TKzu1UgldyKiLHky0e5GQn74t25UnhlZUrNM";
     // let realToken = localStorage.getItem('token'); //use this when you have a login service. 
     const token = `Bearer ${jwt}`;
     const headers = new HttpHeaders()
