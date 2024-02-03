@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, input } from '@angular/core';
 import { FolderService } from '../../Services/folder.service';
 import { FolderListResponse } from '../../Interfaces/folder-response';
 
@@ -9,27 +9,29 @@ import { FolderListResponse } from '../../Interfaces/folder-response';
   templateUrl: './render-folders.component.html',
   styleUrl: './render-folders.component.css'
 })
-export class RenderFoldersComponent implements OnInit {
-  constructor(private folderService: FolderService) { }
+export class RenderFoldersComponent  {
+  
+  @Input() folders : FolderListResponse[] = [];
+  // constructor(private folderService: FolderService) { }
  
-  ngOnInit(): void {
-    this.renderFolders();
-  }
-  folders : FolderListResponse[] = [];
-  renderFolders() {
-    if (typeof localStorage !== 'undefined') {
-      localStorage.setItem('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGYWNlUmVjIiwic3ViIjoiODUxZmZkMGQtZDBmOS00OTk0LThiZjgtOTdkMTNkNDNjMDY4IiwiZXhwIjoxNzA2ODY0ODU1fQ.ac7ApI9TKzu1UgldyKiLHky0e5GQn74t25UnhlZUrNM');
-      let jwt: string = localStorage.getItem('jwt') || '';
-      if (jwt == '') {
-        console.log('jwt is empty');
-        return;
-      }
-      this.folderService.listAllFolders(jwt).subscribe(response => {
-        this.folders = response; // Store the response data in 'folders' variable
-      });
-    } else {
-      console.log('localStorage is not available.');
-    }
-  }
+  // ngOnInit(): void {
+  //   this.renderFolders();
+  // }
+  // folders : FolderListResponse[] = [];
+  // renderFolders() {
+  //   if (typeof localStorage !== 'undefined') {
+  //     localStorage.setItem('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGYWNlUmVjIiwic3ViIjoiYmJlMGJhNTAtYTNlOC00ZjUzLWIxMGYtMjA0NTkzNDdjMGY1IiwiZXhwIjoxNzA3MDA2MTQ2fQ.tBdFWXYimf99eyqI_WEuMWbycVZDrCl7BHLHYUXVS6o');
+  //     let jwt: string = localStorage.getItem('jwt') || '';
+  //     if (jwt == '') {
+  //       console.log('jwt is empty');
+  //       return;
+  //     }
+  //     this.folderService.listAllFolders(jwt).subscribe(response => {
+  //       this.folders = response; // Store the response data in 'folders' variable
+  //     });
+  //   } else {
+  //     console.log('localStorage is not available.');
+  //   }
+  // }
 
 }
