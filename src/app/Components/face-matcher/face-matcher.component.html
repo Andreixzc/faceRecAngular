@@ -13,9 +13,9 @@
             <span class="form-error text-danger">Folder name is required</span>
         }
         <input type="file" (change)="onFileSelect($event)" class="form-control" formControlName="file" id="customFile" />
-        <div><button type="button" (click)="openModal()" class="btn btn-primary mt-3">Abrir Modal</button>
+        <div><button type="button" (click)="openModal()" class="btn btn-primary mt-3">Select folder</button>
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Upload Files</button>
+        <button type="submit" class="btn btn-primary mt-3">Find Matches</button>
     </form>
 </div>
 
@@ -24,7 +24,7 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             @for (item of folders; track $index) {
-                <table> <button (click)="getFolderName(item.name)">{{item.name}}</button></table>
+                <table> <button (click)="getFolderPath(item.folderPklPath)">{{item.name}}</button></table>
             }
             <button (click)="closeModal()" type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
         </div>

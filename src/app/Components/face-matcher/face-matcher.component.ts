@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { Router } from '@angular/router';
 import { FolderListResponse } from '../../Interfaces/folder-response';
 import { NgClass } from '@angular/common';
+import { FindMatcheService } from '../../Services/find-matche.service';
 @Component({
   selector: 'app-face-matcher',
   standalone: true,
@@ -22,9 +23,9 @@ export class FaceMatcherComponent {
   myFiles: string[] = [];
   successUpload: boolean = false;
 
-  folderToBeSearched = "";
+  folderPathToBeSearched = "";
 
-  constructor(private uploadService: UploadService, private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router,private findMatchesService : FindMatcheService) {
     this.uploadForm = this.fb.group({
       folderName: new FormControl("", Validators.required),
       file: new FormControl(null),
@@ -54,23 +55,22 @@ closeModal() {
   }
 }
 
-getFolderName(name: string){
-this. folderToBeSearched = name;
-console.log(this.folderToBeSearched)
+getFolderPath(name: string){
+this. folderPathToBeSearched = name;
+console.log(this.folderPathToBeSearched)
 }
 
   onSubmit() {
     const formData = new FormData();
-    formData.append('folderName', this.uploadForm.get('folderName')?.value);
-
+    formData.append('folderPath', this.folderPathToBeSearched);
     for (let i = 0; i < this.myFiles.length; i++) {
       formData.append("file", this.myFiles[i]);
     }
-
-    this.uploadService.postImages(formData).subscribe(
+    this.findMatchesService.find(formData).subscribe(
       (response) => {
         this.successUpload = true;
-        this.router.navigate(['/file-manager']);
+        console.log(response);
+        // this.router.navigate(['/file-manager']);
       },
       (error) => {
         this.successUpload = false;
@@ -78,4 +78,5 @@ console.log(this.folderToBeSearched)
       }
     );
   }
+ 
 }
