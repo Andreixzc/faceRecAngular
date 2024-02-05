@@ -66,11 +66,14 @@ console.log(this.folderPathToBeSearched)
     for (let i = 0; i < this.myFiles.length; i++) {
       formData.append("file", this.myFiles[i]);
     }
+    console.log("entrou")
     this.findMatchesService.find(formData).subscribe(
       (response) => {
         this.successUpload = true;
         console.log(response);
         // this.router.navigate(['/file-manager']);
+        //validar se a response estiver vazia, se estiver, mostrar uma mensagem de que não foi encontrado nenhum match
+        //caso encontrar, redirecionar para uma nova pagina para mostrar os matches
       },
       (error) => {
         this.successUpload = false;
