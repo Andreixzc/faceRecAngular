@@ -18,6 +18,7 @@ export class FaceMatcherComponent {
 
   @Input() folders: FolderListResponse[] = [];
   teste: boolean = false;
+  notFound: boolean = false;
   loadingFlag: boolean = false;
   uploadForm!: FormGroup;
   file!: string;
@@ -59,6 +60,7 @@ closeModal() {
 getFolderPath(name: string){
 this. folderPathToBeSearched = name;
 console.log(this.folderPathToBeSearched)
+this.closeModal();
 }
 
   onSubmit() {
@@ -73,6 +75,9 @@ console.log(this.folderPathToBeSearched)
         this.successUpload = true;
         this.loadingFlag = false;
         console.log(response);
+        if (response.toString.length == 0) {
+          this.notFound = true;
+        }
         // this.router.navigate(['/file-manager']);
         //validar se a response estiver vazia, se estiver, mostrar uma mensagem de que não foi encontrado nenhum match
         //caso encontrar, redirecionar para uma nova pagina para mostrar os matches

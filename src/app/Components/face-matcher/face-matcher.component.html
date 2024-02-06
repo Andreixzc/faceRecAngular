@@ -2,26 +2,32 @@
     <h5>Find matches</h5>
     <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
         @if (successUpload) {
-            <div class="alert alert-success">
-                <strong>Files uploaded!</strong>
-            </div>
+        <div class="alert alert-success">
+            <strong>Files uploaded!</strong>
+        </div>
         }
         <label class="form-label" for="customFile">Upload reference picture</label>
         <!-- <input type="text" class="form-control mb-3" formControlName="folderName" placeholder="Select folder to be searched"
         aria-label="Nome da pasta" aria-describedby="button-addon2"> -->
         @if (uploadForm.get('folderName')?.hasError('required') && uploadForm.get('folderName')?.touched) {
-            <span class="form-error text-danger">Folder name is required</span>
+        <span class="form-error text-danger">Folder name is required</span>
         }
-        <input type="file" (change)="onFileSelect($event)" class="form-control" formControlName="file" id="customFile" />
+        <input type="file" (change)="onFileSelect($event)" class="form-control" formControlName="file"
+            id="customFile" />
         <div><button type="button" (click)="openModal()" class="btn btn-primary mt-3">Select folder</button>
         </div>
         <button type="submit" class="btn btn-primary mt-3">Find Matches</button>
         @if (loadingFlag) {
-             <div class="spinner-border" role="status">
-  <span class="sr-only">Loading...</span>
-</div>
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
         }
-       
+        @if (notFound) {
+            <div class="alert alert-danger" role="alert">
+                No matches Found!
+              </div>
+        }
+
     </form>
 </div>
 
@@ -30,7 +36,7 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             @for (item of folders; track $index) {
-                <table> <button (click)="getFolderPath(item.folderPklPath)">{{item.name}}</button></table>
+            <table> <button (click)="getFolderPath(item.folderPklPath)">{{item.name}}</button></table>
             }
             <button (click)="closeModal()" type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
         </div>
