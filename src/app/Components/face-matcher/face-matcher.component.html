@@ -16,6 +16,12 @@
         <div><button type="button" (click)="openModal()" class="btn btn-primary mt-3">Select folder</button>
         </div>
         <button type="submit" class="btn btn-primary mt-3">Find Matches</button>
+        @if (loadingFlag) {
+             <div class="spinner-border" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+        }
+       
     </form>
 </div>
 

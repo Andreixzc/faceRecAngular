@@ -18,6 +18,7 @@ export class FaceMatcherComponent {
 
   @Input() folders: FolderListResponse[] = [];
   teste: boolean = false;
+  loadingFlag: boolean = false;
   uploadForm!: FormGroup;
   file!: string;
   myFiles: string[] = [];
@@ -66,10 +67,11 @@ console.log(this.folderPathToBeSearched)
     for (let i = 0; i < this.myFiles.length; i++) {
       formData.append("file", this.myFiles[i]);
     }
-    console.log("entrou")
+    this.loadingFlag = true;
     this.findMatchesService.find(formData).subscribe(
       (response) => {
         this.successUpload = true;
+        this.loadingFlag = false;
         console.log(response);
         // this.router.navigate(['/file-manager']);
         //validar se a response estiver vazia, se estiver, mostrar uma mensagem de que não foi encontrado nenhum match
@@ -77,6 +79,7 @@ console.log(this.folderPathToBeSearched)
       },
       (error) => {
         this.successUpload = false;
+        this.loadingFlag = false;
         console.error("Erro ao fazer upload:", error);
       }
     );
