@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { FolderListResponse } from '../../Interfaces/folder-response';
 import { NgClass } from '@angular/common';
 import { FindMatcheService } from '../../Services/find-matche.service';
+import { MatchesResponse } from '../../Interfaces/matches-response';
 @Component({
   selector: 'app-face-matcher',
   standalone: true,
@@ -17,13 +18,14 @@ export class FaceMatcherComponent {
 
 
   @Input() folders: FolderListResponse[] = [];
-  teste: boolean = false;
   notFound: boolean = false;
+  matchesHasValues : boolean = false;
   loadingFlag: boolean = false;
   uploadForm!: FormGroup;
   file!: string;
   myFiles: string[] = [];
   successUpload: boolean = false;
+  matchesArray : MatchesResponse[] = [];
 
   folderPathToBeSearched = "";
 
@@ -56,13 +58,11 @@ closeModal() {
       modal.style.display = 'none';
   }
 }
-
 getFolderPath(name: string){
 this. folderPathToBeSearched = name;
 console.log(this.folderPathToBeSearched)
 this.closeModal();
 }
-
   onSubmit() {
     const formData = new FormData();
     formData.append('folderPath', this.folderPathToBeSearched);
@@ -71,16 +71,17 @@ this.closeModal();
     }
     this.loadingFlag = true;
     this.findMatchesService.find(formData).subscribe(
-      (response) => {
+      (response: MatchesResponse[]) => {
         this.successUpload = true;
         this.loadingFlag = false;
         console.log(response);
-        if (response.toString.length == 0) {
+        if (response.length === 0) {
           this.notFound = true;
         }
-        // this.router.navigate(['/file-manager']);
-        //validar se a response estiver vazia, se estiver, mostrar uma mensagem de que não foi encontrado nenhum match
-        //caso encontrar, redirecionar para uma nova pagina para mostrar os matches
+        this.matchesArray = response;
+        this.matchesHasValues = true;
+      
+        console.log(this.matchesArray[0].URL)
       },
       (error) => {
         this.successUpload = false;
@@ -89,5 +90,6 @@ this.closeModal();
       }
     );
   }
+  
  
 }

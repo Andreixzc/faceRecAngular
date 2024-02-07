@@ -42,7 +42,7 @@ export class UploadComponent {
     this.uploadService.postImages(formData).subscribe(
       (response) => {
         this.successUpload = true;
-        this.router.navigate(['/file-manager']);
+        // this.router.navigate(['/file-manager']);
       },
       (error) => {
         this.successUpload = false;
