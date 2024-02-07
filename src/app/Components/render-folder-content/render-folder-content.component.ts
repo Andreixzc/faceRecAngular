@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatchesResponse } from '../../Interfaces/matches-response';
 
 @Component({
   selector: 'app-render-folder-content',
@@ -9,4 +10,5 @@ import { Component } from '@angular/core';
 })
 export class RenderFolderContentComponent {
 
+  content : MatchesResponse[] = [];
 }
