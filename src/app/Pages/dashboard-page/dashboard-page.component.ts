@@ -12,7 +12,7 @@ import * as jwt from 'jsonwebtoken';
 @Component({
   selector: 'app-dashboard-page',
   standalone: true,
-  imports: [NavbarComponent, FooterComponent, RenderFoldersComponent, FolderCrudComponent, UploadComponent, FaceMatcherComponent],
+  imports: [NavbarComponent, FooterComponent, RenderFoldersComponent, FolderCrudComponent, UploadComponent, FaceMatcherComponent,RenderFoldersComponent],
   templateUrl: './dashboard-page.component.html',
   styleUrl: './dashboard-page.component.css'
 })

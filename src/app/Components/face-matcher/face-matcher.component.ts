@@ -80,8 +80,6 @@ this.closeModal();
         }
         this.matchesArray = response;
         this.matchesHasValues = true;
-      
-        console.log(this.matchesArray[0].URL)
       },
       (error) => {
         this.successUpload = false;
