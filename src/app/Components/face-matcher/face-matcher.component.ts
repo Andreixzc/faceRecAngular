@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { FolderListResponse } from '../../Interfaces/folder-response';
 import { NgClass } from '@angular/common';
 import { FindMatcheService } from '../../Services/find-matche.service';
-import { MatchesResponse } from '../../Interfaces/matches-response';
+import { folderContentResponse } from '../../Interfaces/folder-content-response';
 @Component({
   selector: 'app-face-matcher',
   standalone: true,
@@ -25,7 +25,7 @@ export class FaceMatcherComponent {
   file!: string;
   myFiles: string[] = [];
   successUpload: boolean = false;
-  matchesArray : MatchesResponse[] = [];
+  matchesArray : folderContentResponse[] = [];
 
   folderPathToBeSearched = "";
 
@@ -71,7 +71,7 @@ this.closeModal();
     }
     this.loadingFlag = true;
     this.findMatchesService.find(formData).subscribe(
-      (response: MatchesResponse[]) => {
+      (response: folderContentResponse[]) => {
         this.successUpload = true;
         this.loadingFlag = false;
         console.log(response);

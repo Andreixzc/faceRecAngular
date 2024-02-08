@@ -1,4 +1,4 @@
-export interface MatchesResponse {
+export interface folderContentResponse {
     folderContentId: string;
     filePath: string;
     URL: string;

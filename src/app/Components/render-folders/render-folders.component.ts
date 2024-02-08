@@ -11,7 +11,13 @@ import { FolderListResponse } from '../../Interfaces/folder-response';
 })
 export class RenderFoldersComponent  {
   
+  constructor(private folderService: FolderService) { }
   @Input() folders : FolderListResponse[] = [];
 
-
+  @Input() folderId : string = "";
+  displayContent(id : string){ 
+    console.log(id)
+  }
+ 
+  
 }

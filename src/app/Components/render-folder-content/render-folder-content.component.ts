@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { MatchesResponse } from '../../Interfaces/matches-response';
+import { Component, input } from '@angular/core';
+import { FolderContentService } from '../../Services/folder-content.service';
+import {folderContentResponse } from '../../Interfaces/folder-content-response';
 
 @Component({
   selector: 'app-render-folder-content',
@@ -10,5 +11,16 @@ import { MatchesResponse } from '../../Interfaces/matches-response';
 })
 export class RenderFolderContentComponent {
 
-  content : MatchesResponse[] = [];
+  folderContent !: folderContentResponse;
+
+  folderId: string = "";
+
+  constructor(private FolderContentService: FolderContentService) {
+    this.listContent();
+  }
+  listContent() {
+    this.FolderContentService.list("1").subscribe((data) => {
+      this.folderContent = data;
+    });
+  }	
 }

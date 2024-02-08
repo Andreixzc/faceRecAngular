@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { MatchesResponse } from '../Interfaces/matches-response';
+import { folderContentResponse } from '../Interfaces/folder-content-response';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class RegisterService {
 
   registerUser(formGroup: FormGroup) {
     formGroup.removeControl('confirmPassword');
-    return this.http.post<MatchesResponse>(this.registerUrl,formGroup.value);
+    return this.http.post<folderContentResponse>(this.registerUrl,formGroup.value);
     // return this.http.post(this.registerUrl, formGroup.value)
   }
 
