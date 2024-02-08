@@ -4,6 +4,7 @@ import { UploadPageComponent } from './Pages/upload-page/upload-page.component';
 import { RegisterPageComponent } from './Pages/register-page/register-page.component';
 import { LoginPageComponent } from './Pages/login-page/login-page.component';
 import { DashboardPageComponent } from './Pages/dashboard-page/dashboard-page.component';
+import { FolderContentPageComponent } from './Pages/folder-content-page/folder-content-page.component';
 export const routes: Routes = [
     {
       path: '',
@@ -24,5 +25,9 @@ export const routes: Routes = [
     {
       path: 'file-dashboard',
       component: DashboardPageComponent
+    },
+    {
+      path: 'folder-content',
+      component: FolderContentPageComponent
     }
   ];

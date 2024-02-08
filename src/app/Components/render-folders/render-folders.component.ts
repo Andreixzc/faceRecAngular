@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, input } from '@angular/core';
 import { FolderService } from '../../Services/folder.service';
 import { FolderListResponse } from '../../Interfaces/folder-response';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-render-folders',
@@ -11,12 +12,13 @@ import { FolderListResponse } from '../../Interfaces/folder-response';
 })
 export class RenderFoldersComponent  {
   
-  constructor(private folderService: FolderService) { }
+  constructor(private folderService: FolderService,private router: Router) { }
   @Input() folders : FolderListResponse[] = [];
 
   @Input() folderId : string = "";
   displayContent(id : string){ 
-    console.log(id)
+    this.folderId = id;
+    this.router.navigate(['/folder-content-page']);
   }
  
   

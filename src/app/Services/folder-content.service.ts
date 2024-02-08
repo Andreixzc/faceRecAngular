@@ -20,7 +20,7 @@ export class FolderContentService {
     const token = `Bearer ${jwt}`;
     const headers = new HttpHeaders().set("Authorization", token);
     headers.append('Authorization', token);
-    return this.Http.get<folderContentResponse>(this.listFoldersUrl.replace("{folderId}", folderId), { headers });
+    return this.Http.get<folderContentResponse[]>(this.listFoldersUrl.replace("{folderId}", folderId), { headers });
 
   }
 

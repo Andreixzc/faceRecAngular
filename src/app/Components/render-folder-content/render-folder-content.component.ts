@@ -19,7 +19,7 @@ export class RenderFolderContentComponent {
     this.listContent();
   }
   listContent() {
-    this.FolderContentService.list("1").subscribe((data) => {
+    this.FolderContentService.list(this.folderId).subscribe((data) => {
       this.folderContent = data;
     });
   }	
