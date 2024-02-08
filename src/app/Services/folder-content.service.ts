@@ -16,10 +16,12 @@ export class FolderContentService {
   list(folderId: string) {
     
     // let realToken = localStorage.getItem('token'); //use this when you have a login service.
-    let jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGYWNlUmVjIiwic3ViIjoiYmJlMGJhNTAtYTNlOC00ZjUzLWIxMGYtMjA0NTkzNDdjMGY1IiwiZXhwIjoxNzA3MzEzNTM0fQ.XQUk1pG0MZYTTgh3WVT3XRwhnafUVVYIV-n02Y4eGSU";
+    let jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGYWNlUmVjIiwic3ViIjoiYmJlMGJhNTAtYTNlOC00ZjUzLWIxMGYtMjA0NTkzNDdjMGY1IiwiZXhwIjoxNzA3NDA3NjAwfQ.wxxmsXKXEsyXPRNKxb1O2xc3XS_1JI7kQMuXlKELM3s";
     const token = `Bearer ${jwt}`;
     const headers = new HttpHeaders().set("Authorization", token);
     headers.append('Authorization', token);
+    console.log("Caralho"+folderId)
+    console.log(this.listFoldersUrl.replace("{folderId}", folderId));
     return this.Http.get<folderContentResponse[]>(this.listFoldersUrl.replace("{folderId}", folderId), { headers });
 
   }

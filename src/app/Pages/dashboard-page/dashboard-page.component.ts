@@ -28,7 +28,7 @@ export class DashboardPageComponent implements OnInit {
   foldersReq: FolderListResponse[] = [];
   renderFolders() {
     if (typeof localStorage !== 'undefined') {
-      localStorage.setItem('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGYWNlUmVjIiwic3ViIjoiYmJlMGJhNTAtYTNlOC00ZjUzLWIxMGYtMjA0NTkzNDdjMGY1IiwiZXhwIjoxNzA3Mzk1NTU2fQ.9DI_Tu0ii-HYK8R7DO7rXXdN-wOuPzke8MJjt11GCXo');
+      localStorage.setItem('jwt', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGYWNlUmVjIiwic3ViIjoiYmJlMGJhNTAtYTNlOC00ZjUzLWIxMGYtMjA0NTkzNDdjMGY1IiwiZXhwIjoxNzA3NDA3NjAwfQ.wxxmsXKXEsyXPRNKxb1O2xc3XS_1JI7kQMuXlKELM3s');
       let jwt: string = localStorage.getItem('jwt') || '';
       if (jwt == '') {
         console.log('jwt is empty');

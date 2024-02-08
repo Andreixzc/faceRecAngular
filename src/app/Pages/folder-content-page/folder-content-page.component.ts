@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from "../../Components/navbar/navbar.component";
 import { FolderCrudComponent } from "../../Components/folder-crud/folder-crud.component";
 import { FooterComponent } from "../../Components/footer/footer.component";
@@ -14,8 +14,17 @@ import { UploadComponent } from '../../Components/upload/upload.component';
     styleUrl: './folder-content-page.component.css',
     imports: [NavbarComponent, FolderCrudComponent, FooterComponent,RenderFolderContentComponent,RenderFoldersComponent,FaceMatcherComponent,UploadComponent]
 })
-export class FolderContentPageComponent {
+export class FolderContentPageComponent implements OnInit {
 
 
   folderIdTodisplayContent : string = "";
+  ngOnInit(): void {
+      console.log(this.folderIdTodisplayContent)
+  }
+
+  
+  
+  
 }
+
+

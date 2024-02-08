@@ -27,7 +27,7 @@ export const routes: Routes = [
       component: DashboardPageComponent
     },
     {
-      path: 'folder-content',
+      path: 'folder-content-page',
       component: FolderContentPageComponent
     }
   ];

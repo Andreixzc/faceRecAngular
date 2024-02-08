@@ -1,6 +1,7 @@
 <app-navbar></app-navbar>
 <app-folder-crud></app-folder-crud>
-<app-render-folders [folderId]="folderIdTodisplayContent"></app-render-folders>
-<!-- compartilhar id da pasta? -->
+
+<!-- Passando folderIdTodisplayContent para RenderFolderContentComponent -->
+<app-render-folder-content [folderId]="folderIdTodisplayContent"></app-render-folder-content>
 
 <app-footer></app-footer>

@@ -12,12 +12,14 @@ import { Router } from '@angular/router';
 })
 export class RenderFoldersComponent  {
   
-  constructor(private folderService: FolderService,private router: Router) { }
-  @Input() folders : FolderListResponse[] = [];
+  @Input() folders: FolderListResponse[] = [];
+  folderIdTodisplayContent: string = ''; // Definindo a propriedade para o folderId
 
-  @Input() folderId : string = "";
-  displayContent(id : string){ 
-    this.folderId = id;
+  constructor(private folderService: FolderService, private router: Router) { }
+
+  displayContent(id: string) {
+    this.folderIdTodisplayContent = id; // Atualizando o folderIdTodisplayContent
+    console.log(this.folderIdTodisplayContent);
     this.router.navigate(['/folder-content-page']);
   }
  
