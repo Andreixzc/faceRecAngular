@@ -20,7 +20,7 @@ export class RenderFoldersComponent  {
   displayContent(id: string) {
     this.folderIdTodisplayContent = id; // Atualizando o folderIdTodisplayContent
     console.log(this.folderIdTodisplayContent);
-    this.router.navigate(['/folder-content-page']);
+    this.router.navigate(['/folder-content-page/:folderId'], { state: { folderId: this.folderIdTodisplayContent } });
   }
  
   

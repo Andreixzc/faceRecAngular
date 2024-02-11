@@ -6,6 +6,8 @@ import { RenderFolderContentComponent } from '../../Components/render-folder-con
 import { RenderFoldersComponent } from '../../Components/render-folders/render-folders.component';
 import { FaceMatcherComponent } from '../../Components/face-matcher/face-matcher.component';
 import { UploadComponent } from '../../Components/upload/upload.component';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
     selector: 'app-folder-content-page',
@@ -15,12 +17,16 @@ import { UploadComponent } from '../../Components/upload/upload.component';
     imports: [NavbarComponent, FolderCrudComponent, FooterComponent,RenderFolderContentComponent,RenderFoldersComponent,FaceMatcherComponent,UploadComponent]
 })
 export class FolderContentPageComponent implements OnInit {
+  constructor(private route: ActivatedRoute) { }
 
-
-  folderIdTodisplayContent : string = "";
-  ngOnInit(): void {
-      console.log(this.folderIdTodisplayContent)
+  folderId: string = '';
+  ngOnInit() {
+    const folderId = history.state.folderId;
+    this.folderId = folderId;
+    console.log('Folder ID:', folderId);
   }
+  
+  
 
   
   

@@ -1,4 +1,4 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, Input, OnInit, input } from '@angular/core';
 import { FolderContentService } from '../../Services/folder-content.service';
 import {folderContentResponse } from '../../Interfaces/folder-content-response';
 
@@ -9,18 +9,20 @@ import {folderContentResponse } from '../../Interfaces/folder-content-response';
   templateUrl: './render-folder-content.component.html',
   styleUrl: './render-folder-content.component.css'
 })
-export class RenderFolderContentComponent {
+export class RenderFolderContentComponent implements OnInit {
   folderContent: folderContentResponse[] = [];
 
-  @Input() folderId: string = '';
+  @Input() folderIdDisplay: string = '';
 
   constructor(private folderContentService: FolderContentService) {
+  }
+  ngOnInit(): void {
     this.listContent();
   }
-
+  
   listContent() {
-    console.log("Printando id: " + this.folderId)
-    this.folderContentService.list(this.folderId).subscribe((data) => {
+    console.log("PRINTANDO FUNCAO: " + this.folderIdDisplay)
+    this.folderContentService.list(this.folderIdDisplay).subscribe((data) => {
       this.folderContent = data;
     });
   }

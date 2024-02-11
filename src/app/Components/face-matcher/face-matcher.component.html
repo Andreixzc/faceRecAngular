@@ -42,7 +42,7 @@
         </div>
     </div>
 </div>
-@if (matchesHasValues) {
+<!-- @if (matchesHasValues) {
     <h5>Matches found:</h5>
     @for (matches of matchesArray; track $index) {
         <div class="container">
@@ -51,4 +51,16 @@
             </div>
           </div>
     }
+} -->
+@if (matchesHasValues) {
+    <h5>Matches found:</h5>
+    
+        <div class="row">
+            @for (matches of matchesArray; track $index) {
+                <div class="col-md-3">
+                    <img src="{{ matches.URL }}" class="img-fluid" alt="">
+                </div>
+            }
+        </div>
+   
 }
