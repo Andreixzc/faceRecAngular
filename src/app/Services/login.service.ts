@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ILoginResponse } from '../Interfaces/login-response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,9 @@ export class LoginService {
 
 
   loginUser(formGroup: FormGroup) {
-    return this.Http.post(this.loginUrl, formGroup.value)//should return a jwt token
+    const options = { headers: new HttpHeaders({ 'skipAuthCheck': 'true' }) };
+    return this.Http.post<ILoginResponse>(this.loginUrl, formGroup.value, options);
+    // return this.Http.post(this.loginUrl, formGroup.value, options)
   }
  
 }

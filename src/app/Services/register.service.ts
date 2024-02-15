@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { folderContentResponse } from '../Interfaces/folder-content-response';
@@ -13,8 +13,8 @@ export class RegisterService {
 
   registerUser(formGroup: FormGroup) {
     formGroup.removeControl('confirmPassword');
-    return this.http.post<folderContentResponse>(this.registerUrl,formGroup.value);
-    // return this.http.post(this.registerUrl, formGroup.value)
+    const options = { headers: new HttpHeaders({ 'skipAuthCheck': 'true' }) };
+    return this.http.post<folderContentResponse>(this.registerUrl,formGroup.value,options);
   }
 
 

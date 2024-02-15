@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginService } from '../../Services/login.service';
 import { error } from 'console';
+import { routes } from '../../app.routes';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +23,7 @@ export class LoginComponent {
   //     password: new FormControl('', [Validators.required])
   //   })
   // }
-  constructor(private fb: FormBuilder, private loginService: LoginService) {
+  constructor(private fb: FormBuilder, private loginService: LoginService,private router: Router) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
@@ -30,13 +32,14 @@ export class LoginComponent {
 
   onSubmit() {
 
-    console.log("entrou")
     if (this.loginForm.valid) {
       this.loginService.loginUser(this.loginForm).subscribe({
         next: response => {
+          
           console.log('Login successful:', response);
           //redirecionar para homepage e armazenar a response no local storage.
-          localStorage.setItem('user_jwt', JSON.stringify(response));
+          localStorage.setItem('jwt', response.token);
+          this.router.navigate(['/file-dashboard']);
         },
         error: error => {
           console.error('Login failed:', error);

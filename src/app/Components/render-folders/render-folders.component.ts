@@ -22,6 +22,9 @@ export class RenderFoldersComponent  {
     console.log(this.folderIdTodisplayContent);
     this.router.navigate(['/folder-content-page/:folderId'], { state: { folderId: this.folderIdTodisplayContent } });
   }
+  chibata(){
+    console.log("hue");
+  }
  
   
 }
